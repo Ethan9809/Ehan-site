@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    - const styleSheets = manifest.filter(i => i.includes("css"))
+    each styleSheet in styleSheets
+      link(rel="stylesheet" href=styleSheet)  
+    script window.__initReduxState__= !{JSON.stringify(state)}
+    title #{title}
+  body
+    div#root !{renderString}
+    - const srcipts = manifest.filter(i => i.includes("js"))
+    each script in srcipts
+      script(src=script)
+

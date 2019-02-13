@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    style
+      include blog.base.css
+      include blog.github.markdown.css
+      include blog.prism.css
+    title #{title}
+  body
+    header
+      div(class="avatar")
+      nav
+        span(id="back") &lt;Backward
+    ul(class="dots")
+    section(class="markdown-body") !{markDown}
+    script
+      include blog.prism.js
+      include blog.dots.js
