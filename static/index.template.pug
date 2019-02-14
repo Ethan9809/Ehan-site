@@ -10,8 +10,9 @@ html(lang="en")
     script window.__initReduxState__= !{JSON.stringify(state)}
     title #{title}
   body
-    div#root !{renderString}
+    div#root
     - const srcipts = manifest.filter(i => i.includes("js"))
     each script in srcipts
       script(src=script)
+    script(src="/sw/index.js")
 

@@ -35,8 +35,10 @@ function initDots(height,parent){
   initClick(parent)
 }
 
-var HEIGHT = document.documentElement.scrollHeight - document.documentElement.clientHeight
-initDots(HEIGHT,document.getElementsByClassName("dots")[0])
-document.getElementById("back").onclick = function(){
-  window.history.back(-1)
+window.onload = function(){
+  var HEIGHT = document.documentElement.scrollHeight - document.documentElement.clientHeight
+  initDots(HEIGHT,document.getElementsByClassName("dots")[0])
+  document.getElementById("back").onclick = function(){
+    window.history.back(-1)
+  }
 }

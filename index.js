@@ -1,4 +1,5 @@
 const path = require("path")
+const fs = require("fs")
 const Koa = require("koa")
 const KoaRouter = require("koa-router")
 const KoaStaticServer = require("koa-static-server")
@@ -22,13 +23,24 @@ app.use(async (ctx,next)=>{
   const url = ctx.url
   if(/^\/api/.test(url) || /^\/assets/.test(url) || /\.(\w+)$/i.test(url) || url === "/about")
     return next()
-  const {renderString,state} = await renderToString(ctx)
-  ctx.body = pug.renderFile(path.resolve(__dirname,"./static/index.template.pug"),{
-    title:"BurPage",
-    renderString,
+  const {renderedNodeStream,state} = await renderToString(ctx)
+  const title = url.includes("blog") ? "blog":url.includes("journal")?"journal":"Ethan's site"
+  const documentBody = pug.renderFile(path.resolve(__dirname,"./static/index.template.pug"),{
+    title,
     state,
     manifest:Object.values(manifest)
   })
+  ctx.status = 200
+  // 禁止使用koa提供的处理响应的方法,使用原声node方法
+  ctx.respond = false
+  const res = ctx.res
+  const bodyExec = /([\s\S]+id="root">)([\s\S]+)/.exec(documentBody)
+  res.write(bodyExec[1])
+  renderedNodeStream.pipe(res,{end:false})
+  renderedNodeStream.on("end",()=>{
+    res.end(bodyExec[2])
+  })
+  return 
 })
 // markdown模板展示
 app.use(async (ctx,next) => {
@@ -50,7 +62,17 @@ app.use(async (ctx,next) => {
     ctx.body = await aboutArticle(ctx.url)
   
 })
-
+// sw.js 文件
+app.use(async (ctx,next) => {
+  if(ctx.url === '/sw.js'){
+    ctx.set({
+      "Content-Type":"application/javascript; charset=utf-8"
+    })
+    ctx.body = fs.readFileSync(path.resolve(__dirname,"./static/sw/sw.js"))
+  }
+  else
+    return next()
+})
 
 
 // 引入路由
@@ -65,6 +87,10 @@ router.use("/api/about", aboutRouter.routes())
 app.use(router.routes())
 
 // 静态文件
+app.use(KoaStaticServer({
+  rootDir: path.resolve(__dirname, "./static/sw"),
+  rootPath: "/sw"
+}))
 app.use(KoaStaticServer({
   rootDir: path.resolve(__dirname, "./static/assets"),
   rootPath: "/assets"
@@ -87,4 +113,4 @@ app.use(KoaStaticServer({
   rootPath: "/journal"
 }))
 
-app.listen(9000)
+app.listen(8080)

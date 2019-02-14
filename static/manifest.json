@@ -1,6 +1,6 @@
 {
-  "app.css": "assets/css/app.22d4371d.bundle.css",
-  "app.js": "assets/js/app.762d7897.bundle.js",
-  "assets/img/avatar.jpg": "assets/img/avatar.562f81e3.jpg",
-  "vendors~app.js": "assets/js/vendors~app.bdf5be0b.bundle.js"
+  "app.css": "/assets/css/app.22d4371d.bundle.css",
+  "app.js": "/assets/js/app.087bbac8.bundle.js",
+  "assets/img/avatar.jpg": "/assets/img/avatar.562f81e3.jpg",
+  "vendors~app.js": "/assets/js/vendors~app.6f4540e5.bundle.js"
 }
