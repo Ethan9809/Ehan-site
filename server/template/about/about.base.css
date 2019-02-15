@@ -16,10 +16,21 @@ ul{
 header{
   padding-top: 50px;
 }
+
+@media screen and (max-width:900px) {
+  header .avatar{
+    width: 15vw;
+    height: 15vw;
+  }
+}
+@media screen and (min-width:900px){
+  header .avatar{
+    width: 10vw;
+    height: 10vw;
+  }
+}
 header .avatar{
   display: block;
-  width: 150px;
-  height: 150px;
   margin: 0 auto 50px auto;
 }
 header nav{

@@ -144,12 +144,13 @@
 }
 .blogArticleList .article .cover {
   display: block;
-  height: 25vw;
   width: 44vw;
   margin: 0 auto 20px auto;
 }
 .blogArticleList .article p {
   font-size: 14px;
+  text-align: justify;
+  line-height: 20px;
 }
 @-webkit-keyframes fade {
   from {
@@ -357,12 +358,24 @@
           transform: rotate(80deg);
 }
 .blogHeader .avatar {
-  height: 15vw;
-  width: 15vw;
+  height: 10vw;
+  width: 10vw;
   margin: 0 auto;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
+}
+@media screen and (max-width: 900px) {
+  .blogHeader .avatar {
+    height: 15vw;
+    width: 15vw;
+  }
+}
+@media screen and (max-width: 400px) {
+  .blogHeader .avatar {
+    height: 20vw;
+    width: 20vw;
+  }
 }
 .blogHeader .avatar:hover:before {
   opacity: 0;
@@ -377,15 +390,22 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url(/assets/img/avatar.562f81e3.jpg) center center no-repeat;
+  background: url(/assets/img/avatar.562f81e3.jpg) center center no-repeat #fff;
   background-size: cover;
+  z-index: 2;
 }
 .blogHeader .avatar a {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 60%;
+  height: 60%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
   background: url(data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PGRlZnM+PHN0eWxlLz48L2RlZnM+PHBhdGggZD0iTTI5NC40IDU1Ni44TDg1LjMzMyAzNDUuNiAyOTQuNCAxMzYuNTMzbDU5LjczMyA1OS43MzRMMjA0LjggMzQ1LjZsMTQ5LjMzMyAxNTEuNDY3eiIvPjxwYXRoIGQ9Ik05MjEuNiA4NTcuNmgtMjU2di04NS4zMzNoMTcwLjY2N3YtMzg0aC02NDB2LTg1LjMzNEg5MjEuNnoiLz48cGF0aCBkPSJNNDA5LjYgNzcyLjI2N2gxNzAuNjY3Vjg1Ny42SDQwOS42eiIgZmlsbD0iIzI5QUJFMiIvPjwvc3ZnPg==) center center no-repeat;
-  background-size: 50px;
+  background-size: cover;
 }
 
 .jouranlArticleList {
@@ -446,7 +466,7 @@
   font-weight: 600;
 }
 .jouranlArticleList .journalArticle >h3 {
-  font-size: 14px;
+  font-size: 15px;
   color: #999;
   font-weight: 700;
   font-style: italic;
@@ -458,15 +478,16 @@
 }
 .jouranlArticleList .journalArticle >img {
   display: block;
-  width: 80%;
-  height: 150px;
+  width: 75%;
   margin: 0 auto;
   margin-bottom: 20px;
-  border: 1px solid #000;
+  border: 1px solid #999;
 }
 .jouranlArticleList .journalArticle p {
   padding: 20px;
   line-height: 20px;
+  font-size: 14px;
+  text-align: justify;
 }
 @-webkit-keyframes fade {
   from {
@@ -533,7 +554,7 @@
   height: 35px;
   line-height: 35px;
   font-size: 15px;
-  background-color: #f6f8fa;
+  background-color: rgba(200,200,200,0.3);
   position: relative;
   margin-bottom: 5px;
   font-weight: 600;
@@ -570,7 +591,7 @@
 .journalHead >.title {
   color: #666;
   font-size: 22px;
-  font-weight: 850;
+  font-weight: 600;
   font-style: italic;
   margin-right: 10px;
 }
