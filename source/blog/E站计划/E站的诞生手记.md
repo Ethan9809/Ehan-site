@@ -155,10 +155,188 @@ server.use((ctx)=>{
 - 将需要获取数据组件增加额外方法,进行数据获取
 
 ```js
+// 第一种 store 中更新数据 dispatch
 
 function fetchdata(store,route){
-
-  return store.dispatch("fetchItem",router)
+  
+  // store 根据路由route更新数据  store中写成promose形式，把数据resolve出来，数据预取存储容器
+  return store.dispatch('fetchItem', route.params.id)
+}
+// 第二种
+function fetchdata(store,route){
+  return axios.get("/api/list").then((res)=>{
+    return res.data
+  })
 }
 
+// entry-server
+// 第一种
+
+export default async context => {
+
+  const app = createApp()
+  const url = context.url
+  app.$router.push(url)
+  const matchedComponents = app.$router.getMatchedComponents()
+  await Promise.all(
+    matchedComponents.fileter(com=>com.fetchdata)
+      .map(fetchdata=>fetchdata(store,app.$router))
+  )
+  // store 状态完成
+
+  if (!matchedComponents.length)
+    return null
+  else
+    return {
+      app,
+      state:store.state
+    }
+}
+
+// server
+
+const koa = require("koa")
+const render = require("vue-server-renderer").createRenderer()
+const createApp = require("./server.bundle").default
+const server = new koa()
+
+server.use(async (ctx,next) => {
+  // 假设路由都能匹配到
+  const {app,state} = await createApp(ctx)
+  const html = await render.renderToString(app)
+  ctx.body = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <script>
+        window.__initStoreState__ = state
+      <script/>
+      <title>Document</title>
+    </head>
+    <body>
+      <div id="app">${html}</div>
+    </body>
+    </html>
+  `
+})
+server.listen(8080)
+
+`````
+
+````js
+// entry-server
+// 第二种
+
+// event-bus
+export default {
+  install(Vue){
+    data(){
+      return {
+        list:[]
+      }
+    },
+    methods:{
+      getList(){
+        return axios.get("http://localhost:7777/api/getList").then((res)=>{
+          this.list = res
+        })
+      }
+    }
+  }
+  Vue.prototype.$events = EventBus
+}
+
+
+//server-entry
+import EventBus from "event"
+Vue.use(EventBus)
+
+export default async context => {
+
+  const app = createApp()
+  const url = context.url
+  app.$router.push(url)
+  const matchedComponents = app.$router.getMatchedComponents()
+  // store 状态完成
+
+  if (!matchedComponents.length)
+    return null
+  else {
+    await Promise.all(
+      matchedComponents.fileter(com=>com.fetchdata)
+        .map(fetchdata=>fetchdata(app.$events,app.$router))  
+    )
+    return {
+      app:app,
+      state:app.$events._data
+    }
+  }
+}
+
+// node-server
+const koa = require("koa")
+const render = require("vue-server-renderer").createRenderer()
+const createApp = require("./server.bundle").default
+const server = new koa()
+
+
+server.use(async (ctx,next) => {
+  // 假设路由都能匹配到
+  const {app,state} = await createApp(ctx)
+  const html = await render.renderToString(app)
+  ctx.body = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <script>
+        window.__initEventBusState__ = state
+      <script/>
+      <title>Document</title>
+    </head>
+    <body>
+      <div id="app">${html}</div>
+    </body>
+    </html>
+  `
+})
+
+server.listen(8080)
+
+
+
+// client 接受数据
+//entry-client.js
+import EventBus from "event"
+Vue.use(EventBus)
+Vue.$events.state = window.__initEventBusState__
+
+(new Vue({
+  //.......
+})).$mount("#app")
+
+
 ```
+
+
+
+## ServiceWorker
+
+
+## 介绍
+
+### 离线应用
+
+
+### 离线优先
+
+
+### 最新内容优先
+
+
+### 灵活，多种组合
