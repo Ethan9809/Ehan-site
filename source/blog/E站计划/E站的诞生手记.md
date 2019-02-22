@@ -162,6 +162,13 @@ function fetchdata(store,route){
   // store 根据路由route更新数据  store中写成promose形式，把数据resolve出来，数据预取存储容器
   return store.dispatch('fetchItem', route.params.id)
 }
+
+
+
+
+
+
+
 // 第二种
 function fetchdata(store,route){
   return axios.get("/api/list").then((res)=>{
@@ -266,8 +273,14 @@ export default async context => {
     return null
   else {
     await Promise.all(
-      matchedComponents.fileter(com=>com.fetchdata)
-        .map(fetchdata=>fetchdata(app.$events,app.$router))  
+      matchedComponents.filter(com=>{
+        console.log(com)
+        return com.fetchdata
+      })
+        .map(com=>{
+          console.log(com.fetchdata)
+          return com.fetchdata(app.$events,app.$router)
+        })  
     )
     return {
       app:app,

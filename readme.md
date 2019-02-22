@@ -52,5 +52,4 @@ Ethan-site
 ## 遗留问题
 
 1. 组件设计未充分考虑,以后可以进一步优化组件结构
-2. SSR未使用react16新API renderToNodeStream/ReactDOM.hydrate() 因为本项目最后返还给客户端的html用到了pug模板引擎。目前还不够熟悉如何将nodestream流结合模板引擎使用
-3. 项目还有一个暂未开放的页面，准备挂一些自己的其他个人项目
+2. 项目还有一个暂未开放的页面，准备挂一些自己的其他个人项目
