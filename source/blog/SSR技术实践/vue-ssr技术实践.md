@@ -1,73 +1,11 @@
 ---
-title: "E站的诞生手记"
-date: "2019-2-13"
+title: "VueSSR技术实践"
+date: "2019-2-20"
 cover: "01cover.jpg"
-summary: "关于本站的的诞生，值得一看哦"
+summary: "记录在进行VueSSR时所遇到的问题，以及解决思路"
 ---
 
-# E站诞生手记
-
-![image](01cover.jpg)
-
-## 本站实现的功能
-
-1. 使用markdown格式书写文章
-2. 将文章信息分类展示
-3. 将文章信息按年限展示
-4. 将文章展示
-
-## 技术栈
-
-1. 编程语言语言 ES6
-2. 视图层框架 react
-3. 状态管理工具 redux
-4. 工程化打包工具 webpack
-5. 后台框架 koa
-6. 数据存储 mongodb
-
-## 项目构思
-
-### 文章书写
-
-- 文章按照类型，分目录进行存
-
-```dir
-  blog
-  ├── type1
-  │   ├── article1.md
-  │   ├── article2.md
-  │   └── article3.md
-  ├── type2
-  │   ├── article1.md
-  │   ├── article2.md
-  │   └── article3.md
-  └── type3
-      ├── article1.md
-      ├── article2.md
-      └── article3.md
-```
-
-- 文章开头存储文章头信息，利用特殊标识与内容分离
-
-  ```html
-    title: "XXXXX"
-    date: "XXXX-X-XX"
-    cover: "XXXX.jpg"
-    summary: "XXXXXXXXXXXXXXXXXXXXXXXX"
-  ```
-
-### 前端
-
-1. 获取全部文章信息，在srore中分类存储
-2. 文章不同信息页面展示利用前端路由(window.history.pushState())
-3. 文章展示利用a标签跳转到经服务端渲染好的文章页面
-
-### 服务端
-
-1. 服务器启动时，遍历blog文件夹，提取所有文章头信息，并存储到数据库中
-2. 当前端请求特定url时,根据文章类型和名称在服务器读取特定的文章内容，并进行提取,结合模板引擎渲染成html字符串返还给前端`/blog/:type/:articlename.md`
-
-## E站优化之SSR
+# Vue-ssr
 
 目的：提高首屏渲染速度
 
@@ -332,24 +270,4 @@ Vue.$events.state = window.__initEventBusState__
 (new Vue({
   //.......
 })).$mount("#app")
-
-
 ```
-
-
-
-## ServiceWorker
-
-
-## 介绍
-
-### 离线应用
-
-
-### 离线优先
-
-
-### 最新内容优先
-
-
-### 灵活，多种组合
