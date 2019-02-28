@@ -24,13 +24,15 @@ const getAllArticles = (target) => {
       const dir = path.resolve(parentdir, name)
       const content = fs.readFileSync(dir)
       const msg = pickMessage(content)
-      if (msg.cover)
-        msg.cover = `/${target}/${parent}/${msg.cover}`
+      // 不存在直接返回null
+      if(!msg.cover || !msg.date)
+        return null
+      msg.cover = `/${target}/${parent}/${msg.cover}`
       msg.title = name.slice(0, -3)
       if (target === "blog")
         msg.type = parent
       return msg
-    })
+    }).filter(article=>article)
     return {
       parent,
       articles

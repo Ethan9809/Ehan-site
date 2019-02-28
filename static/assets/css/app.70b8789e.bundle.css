@@ -151,6 +151,7 @@
   font-size: 14px;
   text-align: justify;
   line-height: 20px;
+  word-break: break-all;
 }
 @-webkit-keyframes fade {
   from {
@@ -488,6 +489,7 @@
   line-height: 20px;
   font-size: 14px;
   text-align: justify;
+  word-break: break-all;
 }
 @-webkit-keyframes fade {
   from {
@@ -579,7 +581,7 @@
   background-size: cover;
   width: 30px;
   height: 30px;
-  right: -40px;
+  right: -15px;
   top: 20px;
 }
 
