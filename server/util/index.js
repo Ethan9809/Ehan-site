@@ -3,7 +3,7 @@ const fs = require("fs")
 
 const pickMessage = (content) => {
   const headReg = /^-{3,}([\S\s]+)-{3,}/
-  const regCreater = (msg => new RegExp(`${msg}\\s?:\\s?["'](\\S+)["']`))
+  const regCreater = (msg => new RegExp(`${msg}\\s?:\\s?["']([^"']+)["']`))
 
   const headContent = headReg.exec(content) && headReg.exec(content)[1]
   const messages = ["cover", "date", "summary"]
