@@ -20,6 +20,9 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 1. ls / ls -a / ls -l (list directory contents)
 2. file (determin file type)
 3. less (view file contents)
+4. wc file (打印行数，字数，字节数)
+5. grep pattern [file...] 找到文件中匹配文本
+6. head / tail － 打印文件开头部分/结尾部分
 
 ### 操作文件和目录
 
@@ -28,3 +31,94 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 3. mkdir —— 创建目录
 4. rm(-i,-r,-f,-v) —— 删除文件和目录
 5. ln (-s)—— 创建硬链接和符号(软)链接
+
+## 有关命令的操作
+
+### 命令种类
+
+- 可执行程序
+- shell内建命令  
+- shell函数  
+- 命令别名  
+
+1. type command —— 查看命令类型
+
+2. which command —— 显示可执行程序的位置
+
+3. help command —— 得到shell内建命令的帮助文档
+
+4. man —— 显示程序手册页
+
+5. apropos —— 显示适当的指令
+
+6. whatis —— 显示非常简洁的命令说明
+
+7. info —— 显示程序 Info 条目
+
+8. alias（alias name='string'/unalias —— 创建自己命令(随shell会话结束消失)
+
+## I/O重定向
+
+### 重定向标准输出 ls -l /usr/bin > ls-output.txt
+
+1. >
+2. >>
+3. /dev/null
+
+### 重定向标准错误 ls -l /bin/usr 2> ls-error.txt
+
+### 重定向标准输出和错误到同一个文件 (标准错误重定向必须总是出现在标准输出重定向之后)
+
+1. ls -l /bin/usr > ls-output.txt 2>&1
+2. ls -l /bin/usr &> ls-output.txt
+
+### 重定向标准输入 cat
+
+1. cat > lazy.txt
+2. cat < lazy.txt
+
+### 管道线 |
+
+> 一个命令的标准输出可以通过管道送至另一个命令的标准输入
+
+1. ls -l /usr/bin | less
+2. ls /bin /usr/bin | sort | uniq (-d)| less
+3. ls /bin /usr/bin | sort | uniq | grep zip
+4. ls /usr/bin | tail -n 5
+5. ls /usr/bin | tee ls.txt | grep zip （从 Stdin 读取数据，并同时输出到 Stdout 和文件）
+
+## Shell 眼中看世界
+
+### echo
+
+1. echo this is a test
+2. echo */ echo D*
+3. echo ~用户
+4. `echo $((2 + 2)) / echo $(($((5**2)) * 3)) / echo $(((5**2) * 3))`
+
+### 花括号展开
+
+1. echo Front-{A,B,C}-Back / echo {Z..A}
+
+2. echo a{A{1,2},B{3,4}}b
+
+3. mkdir {2007..2009}-0{1..9} {2007..2009}-{10..12}
+
+### 参数展开 echo $user
+
+### 命令替换
+
+1. echo $(ls)
+
+2. ls -l $(which cp)
+
+3. file $(ls /usr/bin/* | grep zip)
+
+### 双引号
+
+1. 阻止单词分割 `ls -l "two words.txt"`
+2. 双引号中，参数展开、算术表达式展开和命令替换仍然有效`echo "$USER $((2+2)) $(cal)"`
+
+### 单引号 禁止所有展开
+
+### 转义字符 \ (单引号中失去特殊含义，被看作普通字符)
