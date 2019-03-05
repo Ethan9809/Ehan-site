@@ -5,8 +5,8 @@
 
 function Node(val = null) {
 	this.val = val
-	this.left = left
-	this.rigth = left
+	this.left = null
+	this.right = null
 }
 
 
@@ -110,7 +110,30 @@ function TravelByLevel(root){
 }
 
 
+const root = new Node("root")
+root.left = new Node("left")
+root.right = new Node("right")
+
+root.left.left = new Node("left.left")
+root.left.right = new Node("left.right")
+
+
 // 镜像二叉树
+function MirrorBinaryTree(root){
+
+	if(root === null)
+		return root
+	let left = MirrorBinaryTree(root.left)
+	let right =  MirrorBinaryTree(root.right)
+
+	root.left = right
+	root.right = left
+
+	return root
+}
+
+console.log(root)
+console.log(MirrorBinaryTree(root))
 
 
 
