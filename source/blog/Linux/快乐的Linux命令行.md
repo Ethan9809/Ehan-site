@@ -1,5 +1,5 @@
 ---
-title: "快乐的Linux命令行"
+title: "快乐的Linux命令行(一)"
 date: "2019-2-28"
 cover: "linuxcover.jpg"
 summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND LINE）一书进行Linux命令行系统学习。由于Liux命令行多而杂，所以将书中所出现命令行简要记录下来，定期回顾实践，以方便记忆"
@@ -9,13 +9,19 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 
 根据[快乐的命令行](https://github.com/zhan741965531/TCLC-CN)一书进行Linux命令行系统学习。由于Liux命令行多而杂，所以将书中所出现命令行简要记录下来，定期回顾实践，以方便记忆。
 
-以前对linux命令行掌握程度完全是半吊子水平，从未有系统的学习过。
-
-平时遇到一些操作也都是借助搜索引擎，而且不会进行命令行的相关记录。这样导致的后果就是十分容易忘记,当时写着没问题，可是隔了几天忘记了，又得借助搜索引擎。
-
 为什么会萌生系统学习linux命令行想法呢，最大原因可能就是新鲜感。
 
 写此篇文章的时候我正在上海实习，实习期间由于被分配到的任务比较少而简单，所以一天之中大量的时间，我都会看`前端`技术文章。看的多了就有些`疲倦`了。这时候就需要一些对我来说`新鲜`的知识来让我保持一定的学习动力。而这时我正在准备向`python爬虫`方向拓展兴趣，所以在大致的学完`python`,`sql`之后,便萌生了系统学习`linux命令行`的想法。
+
+本文主要为流水账记录命令形式，方便自己回顾，内容主要是`shell`基本命令集合
+- 文件系统
+- 命令操作
+- IO重定向
+- shell特殊功能
+- 键盘操作技巧
+- 查看/更改权限
+- 进程
+
 
 ## 文件系统
 
@@ -38,7 +44,7 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 
 ## 有关命令的操作
 
-### 命令种类
+### 命令分类
 
 - 可执行程序
 - shell内建命令  
@@ -81,9 +87,9 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 1. cat > lazy.txt
 2. cat < lazy.txt
 
-### 管道线 |
-
-> 一个命令的标准输出可以通过管道送至另一个命令的标准输入
+### 管道线 |  
+  
+一个命令的标准输出可以通过管道送至另一个命令的标准输入
 
 1. ls -l /usr/bin | less
 2. ls /bin /usr/bin | sort | uniq (-d)| less
@@ -132,6 +138,12 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 1. sleep 10; echo -e "Time's up\a"
 
 2. sleep 10; echo "Time's up" $'\a'
+
+
+
+
+
+
 
 
 
@@ -211,12 +223,14 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 2. su
 3. sudo（/etc/sudoers）
 
-### chown － 更改文件所有者和用户组（需要超级用户权限）
-> chown [owner][:[group]] file
+### chown － 更改文件所有者和用户组（需要超级用户权限）  
+
+chown [owner][:[group]] file
 
 ### passwd
 
 ### addusr/useradd/groupadd
+
 
 
 

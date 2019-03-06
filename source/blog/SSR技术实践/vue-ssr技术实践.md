@@ -1,9 +1,9 @@
----
+<!-- ---
 title: "VueSSR技术实践"
 date: "2019-2-20"
 cover: "01cover.jpg"
 summary: "记录在进行VueSSR时所遇到的问题，以及解决思路"
----
+--- -->
 
 # Vue-ssr
 
