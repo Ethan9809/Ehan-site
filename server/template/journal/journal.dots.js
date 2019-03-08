@@ -10,7 +10,7 @@ function createDots(dotsNum,parent){
 function initScroll(parent){
   window.addEventListener("scroll",function(){
     var top = document.documentElement.scrollTop
-    var num = Math.ceil(top/300)
+    var num = Math.ceil(top/400)
     for(var i = 0; i< parent.children.length;i++){
       parent.children[i].className = ""
     }
@@ -24,12 +24,12 @@ function initClick(parent){
     var index = Array.from(parent.children).findIndex((i)=>i===e.target)
     if(index === -1)
       return
-    document.documentElement.scrollTop = (index + 1)*300
+    document.documentElement.scrollTop = (index + 1)*400
   })
 }
 function initDots(height,parent){
   // 计算远点个数
-  var dotsNum = Math.floor(height/300)
+  var dotsNum = Math.floor(height/400)
   createDots(dotsNum,parent)
   initScroll(parent)
   initClick(parent)
