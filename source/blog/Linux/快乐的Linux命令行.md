@@ -116,7 +116,9 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 
 3. mkdir {2007..2009}-0{1..9} {2007..2009}-{10..12}
 
-### 参数展开 echo $user
+### 参数展开 
+
+- echo $user
 
 ### 命令替换
 
@@ -131,22 +133,17 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 1. 阻止单词分割 `ls -l "two words.txt"`
 2. 双引号中，参数展开、算术表达式展开和命令替换仍然有效`echo "$USER $((2+2)) $(cal)"`
 
-### 单引号 禁止所有展开
+### 单引号 
 
-### 转义字符 \ (单引号中失去特殊含义，被看作普通字符)
+- 禁止所有展开
 
+### 转义字符 \ 
+  
+单引号中失去特殊含义，被看作普通字符)
+  
 1. sleep 10; echo -e "Time's up\a"
 
 2. sleep 10; echo "Time's up" $'\a'
-
-
-
-
-
-
-
-
-
 
 
 ## 键盘高级操作技巧
@@ -158,7 +155,8 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 
 ### 命令行编辑
 
-#### 移动光标
+#### 移动光标  
+
 1. ctrl a
 2. ctrl e
 3. ctrl f
@@ -167,27 +165,28 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 6. alt b
 7. ctrl l
 
-#### 修改文本
+#### 修改文本  
+
 1. ctrl d
 2. ctrl t
 3. alt t
 4. alt l
 5. alt -u 
 
-#### 复制粘贴文本
+#### 复制粘贴文本  
+
 1. ctrl k
 2. ctrl u
 3. alt d
 4. alt backspace
 5. ctrl y
 
-#### 历史命令展开
+#### 历史命令展开  
+
 1. !!
 2. !number
 3. !string
 4. !?string
-
-
 
 ## 权限
 
@@ -202,23 +201,29 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 
 ### 用户，用户组
 
-### 读取，写入和执行
--rw-r--r-- 1 root root 0
+### 读取，写入和执行  
+
+-rw-r--r-- 1 root root 0  
+
 1. 文件类型 -，d,l,c,b
 2. 文件模式
-        - r 文件可打开可读，目录则可列出其中内容（必须设x）
+         - r 文件可打开可读，目录则可列出其中内容（必须设x）
         - w 文件可写可改，目录则可在其下移动修改新建文件(必须设置x)
-        - x 文件可执行，（必须设r），目录允许进入
-> 符号连接权限都是虚拟的，真是权限应该以符号连接符指向的文件为准
+        - x 文件可执行，（必须设r），目录允许进入    
 
-### chmod 
-> 更改文件或目录的模式（权限），可以利用 chmod 命令。注意只有文件的所有者或者超级用户才 能更改文件或目录的模式。
+3. 符号连接权限都是虚拟的，真实权限应该以符号连接符指向的文件为准
+
+### chmod
+
+> 更改文件或目录的模式（权限），可以利用 chmod 命令。注意只有文件的所有者或者超级用户才 能更改文件或目录的模式。  
+
 1. 八进制表示 chmod 600 foo.txt
 2. 字母表示 u,g,r  chmod u+x,g-x,ug=rw
 3. umask (设置默认权限)
 4. setuid ,setgid ,sticky  (位)
 
-### 更改用户
+### 更改用户  
+
 1. 注销系统，以其他用户身份登录
 2. su
 3. sudo（/etc/sudoers）
@@ -231,16 +236,15 @@ chown [owner][:[group]] file
 
 ### addusr/useradd/groupadd
 
-
-
-
 ## 进程
 
-### 查看进程
+### 查看进程  
+
 1. ps  / ps -x
 2. top
 
-### 控制进程
+### 控制进程  
+
 1. jobs
 2. &
 3. fg %`jobspec` / bg %`jobspec` (移动到后台)
