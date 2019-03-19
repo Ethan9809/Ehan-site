@@ -1,9 +1,9 @@
----
+<!-- ---
 title: "JS常见编程问题(一)"
-date: "2019-3-8"
+date: "2019-03-08"
 cover: "01cover.jpg"
 summary: "最近由于准备春招，复习了一些js常见的编程问题，为了不让自己手生，所以手敲了一遍作为复习"
----  
+---   -->
 
 # JS常见编程问题(一)
 
@@ -54,11 +54,14 @@ class Promise {
 ````
 
 ### PromiseA+规范
-#### Promise 的状态
+#### Promise 的状态  
+
 1. 等待态（Pending）
 2. 执行态（Fulfilled）
-3. 拒绝态（Rejected）
-#### Then 方法
+3. 拒绝态（Rejected）  
+
+#### Then 方法  
+
 1. 一个 promise 必须提供一个 then 方法以访问其当前值、终值和据因
 2. then 方法必须返回一个 promise 对象 
 
@@ -224,8 +227,6 @@ Function.prototype.apply = apply
 ## 实现bind
 
 ````js
-
-a = c.bind(1)
 function bind(context){
 
 
@@ -233,36 +234,6 @@ function bind(context){
 
 		this.apply(context,arg)				
 	}
-}
-
-````
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-````js
-function async fetchFirst(arrOfUrl){
-
-	let promises = arrOfUrl.map(
-		i => (ajax.get(i))
-	)
-	const ret = await Promise.race(
-		promises		
-	)
-	if(ret.status === "200")
-		return ret
-	else
-		return await fetchFirst(arrOfUrl.)
 }
 
 ````
