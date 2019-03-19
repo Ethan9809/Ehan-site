@@ -69,64 +69,68 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 
 ## I/O重定向
 
-### 重定向标准输出 ls -l /usr/bin > ls-output.txt
+### 重定向标准输出  
 
-1. >
-2. >>
-3. /dev/null
+`ls -l /usr/bin > ls-output.txt`  
 
-### 重定向标准错误 ls -l /bin/usr 2> ls-error.txt
+1. `>`
+2. `>>`
+3. `/dev/null`
+
+### 重定向标准错误   
+
+`ls -l /bin/usr 2> ls-error.txt`
 
 ### 重定向标准输出和错误到同一个文件 (标准错误重定向必须总是出现在标准输出重定向之后)
 
-1. ls -l /bin/usr > ls-output.txt 2>&1
-2. ls -l /bin/usr &> ls-output.txt
+1. `ls -l /bin/usr > ls-output.txt 2>&1`
+2. `ls -l /bin/usr &> ls-output.txt`
 
 ### 重定向标准输入 cat
 
-1. cat > lazy.txt
-2. cat < lazy.txt
+1. `cat > lazy.txt`
+2. `cat < lazy.txt`
 
 ### 管道线 |  
   
 一个命令的标准输出可以通过管道送至另一个命令的标准输入
 
-1. ls -l /usr/bin | less
-2. ls /bin /usr/bin | sort | uniq (-d)| less
-3. ls /bin /usr/bin | sort | uniq | grep zip
-4. ls /usr/bin | tail -n 5
-5. ls /usr/bin | tee ls.txt | grep zip （从 Stdin 读取数据，并同时输出到 Stdout 和文件）
+1. `ls -l /usr/bin | less`
+2. `ls /bin /usr/bin | sort | uniq (-d)| less`
+3. `ls /bin /usr/bin | sort | uniq | grep zip`
+4. `ls /usr/bin | tail -n 5`
+5. `ls /usr/bin | tee ls.txt | grep zip` （从 Stdin 读取数据，并同时输出到 Stdout 和文件）
 
 ## Shell 眼中看世界
 
 ### echo
 
-1. echo this is a test
-2. echo */ echo D*
-3. echo ~用户
+1. `echo this is a test`
+2. `echo */ echo D*`
+3. `echo ~用户`
 4. `echo $((2 + 2)) / echo $(($((5**2)) * 3)) / echo $(((5**2) * 3))`
-5. echo -e "\a" （解释转义序列）
+5. `echo -e "\a"` （解释转义序列）
 
 
 ### 花括号展开
 
-1. echo Front-{A,B,C}-Back / echo {Z..A}
+1. `echo Front-{A,B,C}-Back / echo {Z..A}`
 
-2. echo a{A{1,2},B{3,4}}b
+2. `echo a{A{1,2},B{3,4}}b`
 
-3. mkdir {2007..2009}-0{1..9} {2007..2009}-{10..12}
+3. `mkdir {2007..2009}-0{1..9} {2007..2009}-{10..12}`
 
 ### 参数展开 
 
-- echo $user
+- `echo $user`
 
 ### 命令替换
 
-1. echo $(ls)
+1. `echo $(ls)`
 
-2. ls -l $(which cp)
+2. `ls -l $(which cp)`
 
-3. file $(ls /usr/bin/* | grep zip)
+3. `file $(ls /usr/bin/* | grep zip)`
 
 ### 双引号
 
@@ -141,9 +145,9 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
   
 单引号中失去特殊含义，被看作普通字符)
   
-1. sleep 10; echo -e "Time's up\a"
+1. `sleep 10; echo -e "Time's up\a"`
 
-2. sleep 10; echo "Time's up" $'\a'
+2. `sleep 10; echo "Time's up" $'\a'`
 
 
 ## 键盘高级操作技巧
@@ -157,29 +161,29 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 
 #### 移动光标  
 
-1. ctrl a
-2. ctrl e
-3. ctrl f
-4. ctrl b
-5. alt f
-6. alt b
-7. ctrl l
+1. `ctrl a`
+2. `ctrl e`
+3. `ctrl f`
+4. `ctrl b`
+5. `alt f`
+6. `alt b`
+7. `ctrl l`
 
 #### 修改文本  
 
-1. ctrl d
-2. ctrl t
-3. alt t
-4. alt l
-5. alt -u 
+1. `ctrl d`
+2. `ctrl t`
+3. `alt t`
+4. `alt l`
+5. `alt -u` 
 
 #### 复制粘贴文本  
 
-1. ctrl k
-2. ctrl u
-3. alt d
-4. alt backspace
-5. ctrl y
+1. `ctrl k`
+2. `ctrl u`
+3. `alt d`
+4. `alt backspace`
+5. `ctrl y`
 
 #### 历史命令展开  
 
@@ -202,35 +206,35 @@ summary: "2019.2.28开始阅读《快乐的Linux命令行》（THE LINUX COMMAND
 ### 用户，用户组
 
 ### 读取，写入和执行  
-
--rw-r--r-- 1 root root 0  
+  
+`-rw-r--r-- 1 root root 0 ` 
 
 1. 文件类型 -，d,l,c,b
 2. 文件模式
-         - r 文件可打开可读，目录则可列出其中内容（必须设x）
+        - r 文件可打开可读，目录则可列出其中内容（必须设x）
         - w 文件可写可改，目录则可在其下移动修改新建文件(必须设置x)
         - x 文件可执行，（必须设r），目录允许进入    
 
 3. 符号连接权限都是虚拟的，真实权限应该以符号连接符指向的文件为准
 
 ### chmod
+  
+更改文件或目录的模式（权限），可以利用 chmod 命令。注意只有文件的所有者或者超级用户才 能更改文件或目录的模式。    
 
-> 更改文件或目录的模式（权限），可以利用 chmod 命令。注意只有文件的所有者或者超级用户才 能更改文件或目录的模式。  
-
-1. 八进制表示 chmod 600 foo.txt
-2. 字母表示 u,g,r  chmod u+x,g-x,ug=rw
+1. 八进制表示 `chmod 600 foo.txt`
+2. 字母表示 u,g,r  `chmod u+x,g-x,ug=rw`
 3. umask (设置默认权限)
 4. setuid ,setgid ,sticky  (位)
 
 ### 更改用户  
 
 1. 注销系统，以其他用户身份登录
-2. su
-3. sudo（/etc/sudoers）
+2. `su -`
+3. `sudo（/etc/sudoers）`
 
 ### chown － 更改文件所有者和用户组（需要超级用户权限）  
 
-chown [owner][:[group]] file
+`chown [owner][:[group]] file`
 
 ### passwd
 
@@ -240,15 +244,15 @@ chown [owner][:[group]] file
 
 ### 查看进程  
 
-1. ps  / ps -x
-2. top
+1. `ps  / ps -x`
+2. `top`
 
 ### 控制进程  
 
 1. jobs
 2. &
 3. fg %`jobspec` / bg %`jobspec` (移动到后台)
-4. ctrl c
-5. ctrl z
+4. `ctrl c`
+5. `ctrl z`
 6. kill `PID` / kill %`jobspec` `HUB/INT/KILL/TERM/COUNT/STOP`
 7. killall
