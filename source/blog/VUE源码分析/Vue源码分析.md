@@ -4,6 +4,7 @@
 ## new Vue() 的过程中发生了什么？
 
 在Vue进行实例初始化的时候，会进行`_init`
+
 1. initLifecycle
 2. initEvents
 3. initRender
