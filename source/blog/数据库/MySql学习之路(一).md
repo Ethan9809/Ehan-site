@@ -108,7 +108,11 @@ SELECT id FROM students ORDER BY id DESC LIMIT 1;
 #### 过滤数据
 
 - where
-- between
+- between ... and ...
+- or
+- and
+- in
+- not
 
 ````sql
 SELECT * FROM students WHERE name = '小明';
@@ -120,5 +124,92 @@ SELECT * FROM students WHERE id IS NULL;
 /*
   NULL具有特殊含义，在通过过滤选择出不具有特定值的行时，NULL不会被过滤掉。
 */
+// or
+SELECT * FROM students WHERE name = '小明' OR name = '小红';
+
+// and
+SELECT * FROM students WHERE name = '小红' AND id = 2;
+
+// in
+SELECT * FROM students WHERE id IN (1,2);
+
+// not
+// mysql 支持 not 对 in、between、exists 取反
+SELECT * FROM students WHERE id NOT IN (1,2);
+
+````
+
+#### 通配符
+
+- like
+- %
+- _
+
+````sql
+// % 匹配任意数量[0,]的任意字符
+// % 不能匹配NULL
+SELECT * FROM students WHERE name LIKE '小%'
+
+// _ 匹配单个字符
+SELECT * FROM students WHERE name LIKE '_红'
+
+
+````
+
+#### 正则表达式
+
+- REGEXP
+
+````sql
+// 不会返回数据
+SELECT * FROM students WHERE name LIKE '小红'
+// 会返回数据
+SELECT * FROM students WHERE name REGEXP '小红'
+SELECT * FROM students WHERE name REGEXP '小红|小明'
+
+````
+
+#### 计算字段
+
+- Concat 连接
+- Rtrim/Ltrim/Trim  去除右/左/左右空格
+- AS
+- `+ - * /`
+
+````sql
+SELECT Concat(name,'(',id,')') FROM students ORDER BY id
+
+SELECT id * 2 AS new_id FROM students
+````
+
+#### 数据处理函数
+
+##### 文本处理函数
+
+- Left
+- Length
+- Locate
+- Lower
+- Ltrim Rtrim Trim
+- Right
+- Soundex
+- SubString
+- Upper
+
+##### 日期处理函数
+
+##### 数值处理函数
+
+#### 聚集函数
+
+- AVG
+- COUNT
+- MAX
+- MIN
+- SUM
+- DISTINCT
+
+````sql
+SELECT COUNT(*) AS students_num,MIN(id) AS min_id,MAX(id) AS max_id,AVG(DISTINCT id) FROM students
 
 ````
