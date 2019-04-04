@@ -213,3 +213,63 @@ SELECT id * 2 AS new_id FROM students
 SELECT COUNT(*) AS students_num,MIN(id) AS min_id,MAX(id) AS max_id,AVG(DISTINCT id) FROM students
 
 ````
+
+#### 分组数据
+
+- GROUP BY
+- HAVING
+
+````sql
+SELECT id,COUNT(*) FROM students GROUP BY name WITH ROLLUP
+
+SELECT id,COUNT(*) FROM students GROUP BY name HAVING COUNT(*) >= 1
+// WHERE 操作符只能用于过滤行,在分组前进行过滤
+// HAVING 操作符不仅可以过滤行还可以过滤分组，在分组后进行过滤
+// HAVING 支持 WHERE 的所有操作
+
+````
+
+#### SELECT子句顺序
+
+<table>
+  <tr>
+    <td>子句</td>
+    <td>说明</td>
+    <td>是否必须使用</td>
+  </tr>
+  <tr>
+    <td>SELECT</td>
+    <td>要返回的列或表达式</td>
+    <td>是</td>
+  </tr>
+  <tr>
+    <td>FROM</td>
+    <td>从中检索数据的表</td>
+    <td>仅在从表选择数据时使用</td>
+  </tr>
+  <tr>
+    <td>WHERE</td>
+    <td>行级过滤</td>
+    <td>否</td>
+  </tr>
+  <tr>
+    <td>GROUP BY</td>
+    <td>分组说明</td>
+    <td>仅在按组计算聚集时使用</td>
+  </tr>
+  <tr>
+    <td>HAVING</td>
+    <td>组级过滤</td>
+    <td>否</td>
+  </tr>
+  <tr>
+    <td>ORDER BY</td>
+    <td>输出排序顺序</td>
+    <td>否</td>
+  </tr>
+  <tr>
+    <td>LIMIT</td>
+    <td>要检索的行数</td>
+    <td>否</td>
+  </tr>
+</table>

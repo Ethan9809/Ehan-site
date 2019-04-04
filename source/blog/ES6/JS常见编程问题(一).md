@@ -156,7 +156,6 @@ function setInterval(fn,interval){
 ```
 
 
-
 ## 数组flat
 ```js
 
@@ -247,7 +246,35 @@ function bind(context){
 
 
 
+## 实现jsonStringify
 
+````javascript
+function jsonStringify(obj){
+  let ret = ""
+	for(let [key,val] of Object.entries(boj)){
+		if(typeof val === 'object')
+			ret += `${key}:${jsonStringify(val)}`
+		else
+			ret += `${key}:${val}`
+	}
+	return `{${ret}}`
+}
 
+````
 
+## 函数柯里化
 
+````js
+function curry(fn,args){
+	let length = fn.length
+	let args = args || []
+	return function(...arg){
+		let newArgs = arg.concat(args)
+		if(newArgs.length >= length)
+			return fn.apply(this,newArgs)
+		else
+			return curry.apply(this,newArgs)
+	}
+}
+
+````

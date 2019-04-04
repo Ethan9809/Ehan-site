@@ -5,11 +5,11 @@ cover: "01cover.jpg"
 summary: "记录在进行VueSSR时所遇到的问题，以及解决思路"
 --- -->
 
-# Vue-ssr
+# VueSSR
 
 目的：提高首屏渲染速度
 
-### 非SSR
+## 非SSR 网页结构
 
 ```html
 html
@@ -25,18 +25,17 @@ html
 2. 客户端返回html页面
 3. 客户端接收到html从上到下进行解析
 ![image](browser.jpg)
-4. 浏览器演示，引发重绘
-5. 路由交给前端
+4. 浏览器获取js文件，操作dom引发页面重排
 
-### SSR流程
+## SSR流程
 
 1. client端和server端之间添加node中间层
 2. client向node服务器请求页面
 3. node根据路由进行判断，得到路由对应组件，并进行渲染，返回页面
 
-### 路由判断
+## 路由判断
 
-````javascript
+````js
 // webpack打包入口文件
 export default ctx => {
   const store = createStore()
@@ -61,7 +60,7 @@ export default ctx => {
 3. 不可使用style-loader
 4. vue-style-loader
 
-```javascript
+```js
 const Koa = require("koa")
 const renderedString = require("./server.bundle").default
 const server = new koa()
