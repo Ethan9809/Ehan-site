@@ -54,6 +54,16 @@ CREATE VIEW customereamaillist as
 SELECT cust_id , cust_name, cust_email
 FROM customers
 WHERE cust_email IS NOT NULL;
+
+-- 使用视图与计算字段
+CREATE VIEW orderitemsexpanded AS
+SELECT order_num,
+       prod_id,
+       quantity,
+       item_price,
+       quantity*item_price AS expanded_price
+FROM orderitems;
+
 -- 查看创建视图
 
 -- 删除视图
